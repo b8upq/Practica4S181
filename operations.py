@@ -2,15 +2,25 @@
 import sqlite3
 
 
-conexion = sqlite3.connect('Almacen_Bebidas.db')
 
 
 ####### DECLARACION DE VARIABLES #######
 class Almacen:
     
-    def altaBD(self, nombre, clasificacion, marca, precio):
-        id = int(input("Ingresa el ID de tu bebida: "))
-        nombre = str(input("Ingresa el nombre de la bebida: "))
-        clasificacion = str(input("Ingresa la clasificación de la bebida: "))
-        marca = str(input("Ingresa la marca de la bebida: "))
-        precio = float(input("Ingresa el precio de tus bebida: "))
+    def self(self, id, nombre, clasificacion, marca, precio):
+        self.id = id
+        self.nombre = nombre
+        self.clasificaciom = clasificacion
+        self.marca = marca
+        self.precio = precio
+    
+    def altaBD(self, id, nombre, clasificacion, marca, precio):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"INSERT INTO Bebidas VALUES ({id}, '{nombre}', '{clasificacion}', '{marca}', {precio})"
+        cursor.execute(instruccion)
+        conexion.commit()
+        conexion.close()
+        print("¡Registro exitoso!")
+
+        
