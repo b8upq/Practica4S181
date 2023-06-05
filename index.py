@@ -13,7 +13,9 @@ class Menu:
         drinks.altaBD(idR,nombreR,clasificacionR,marcaR,precioR)
         
     def opcion2():
-        print("Has escogido la opción 2.")    
+        dID = int(input("Ingresa el ID del registro que deseas eliminar: "))   
+        
+        drinks.deleteID(dID)
 
     def opcion3():
         print("Selecciona que campo deseas consultar: ")
@@ -99,19 +101,42 @@ class Menu:
             else:
                 print("Opción inválida. Por favor, elige nuevamente.")  
     
+    def opcion5():
+        drinks.mostrarTODO()
+        
+    def opcion6():
+        drinks.mostrarPROMEDIO()
+        
+    def opcion7():
+        cMARCA = str(input("Ingresa la marca que deseas buscar: "))
+        drinks.contarBebidas(cMARCA)
     
+    def opcion8():
+        cCLAS = str(input("Ingresa la clasificación que deseas buscar: "))
+        drinks.contarClas(cCLAS)
+    
+        
 print("------ MENU ------")
 print("1. Genera un registro.")
 print("2. Elimina un registro.")
 print("3. Realiza una consulta.")
 print("4. Realiza una actualización de datos.")
+print("5. Mostrar todas las bebidas.")
+print("6. Mostrar el precio promedio de todas las bebidas.")
+print("7. Mostrar la cantidad de todas las bebidas registradas.")
+print("8. Mostrar la cantidad de clasificación de todas las bebidas.")
+
 print("0. Salir")
 
 opciones = {
     1: Menu.opcion1,
     2: Menu.opcion2,
     3: Menu.opcion3,
-    4: Menu.opcion4
+    4: Menu.opcion4,
+    5: Menu.opcion5,
+    6: Menu.opcion6,
+    7: Menu.opcion7,
+    8: Menu.opcion8
 }
 
 while True:

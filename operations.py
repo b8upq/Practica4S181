@@ -22,6 +22,15 @@ class Almacen:
         conexion.commit()
         conexion.close()
         print("¡Registro exitoso!")
+  
+    def deleteID(self, id):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"DELETE FROM Bebidas WHERE id = {id}"
+        cursor.execute(instruccion)
+        conexion.commit()
+        conexion.close()
+        print("¡Se elimino correctamente!")
         
     def searchID(self, id):
         conexion = sqlite3.connect('Almacen_Bebidas.db')
@@ -128,3 +137,51 @@ class Almacen:
             conexion.commit()
             conexion.close()        
             print("Se ha actualizado el precio correctamente.")
+            
+    def mostrarTODO(self):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"SELECT * FROM Bebidas"
+        cursor.execute(instruccion)
+        datos = cursor.fetchall()
+        conexion.commit()
+        conexion.close()
+        print(datos)
+
+    def mostrarPROMEDIO(self):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"SELECT AVG(precio) FROM Bebidas"
+        cursor.execute(instruccion)
+        datos = cursor.fetchall()
+        conexion.commit()
+        conexion.close()
+        print("El promedio es: ",datos)
+        
+    def contarBebidas(self, marca):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"SELECT COUNT(*) FROM Bebidas WHERE marca like '{marca}%'"
+        cursor.execute(instruccion)
+        datos = cursor.fetchall()
+        conexion.commit()
+        conexion.close()
+        
+        if (datos == [(0,)]):
+            print("No existen articulos con ese nombre.")  
+        else:
+            print("La cantidad de bebidas de la marca es: ",datos)
+        
+    def contarClas(self, clasificacion):
+        conexion = sqlite3.connect('Almacen_Bebidas.db')
+        cursor = conexion.cursor()
+        instruccion = f"SELECT COUNT(*) FROM Bebidas WHERE clasificacion like '{clasificacion}'"
+        cursor.execute(instruccion)
+        datos = cursor.fetchall()
+        conexion.commit()
+        conexion.close()
+        
+        if (datos == [(0,)]):
+            print("No existen articulos con ese nombre.")  
+        else:
+            print("La cantidad de clasificación es: ",datos)
